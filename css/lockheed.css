@@ -2,3 +2,9 @@
 	margin:auto;
 	text-align: center;
 }
+
+#options {
+   display:table;
+   margin: 0 auto;
+   
+}
