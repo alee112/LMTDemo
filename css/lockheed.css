@@ -8,3 +8,27 @@
    margin: 0 auto;
    
 }
+
+.jumbotron{
+	background-color: #337ab7;
+	margin-top: 0px;
+	margin-bottom: 0px;
+
+}
+
+h1.pagehead{
+	font-size: 34px;
+	color:white;
+}
+
+input,select{
+	margin-right: 400px;
+	float:right;
+}
+
+.radio{
+	margin-left: 20px;
+}
+
+
+

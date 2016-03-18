@@ -17,13 +17,28 @@
 	
 	<div class="jumbotron" id="blue">
 		<div id="center">
-		<h1 class = "pagehead">Program Report</h1>
+		<h1 class = "pagehead">Failure/Replacement Entries</h1>
 	</div>
 	</div>
 		
 	</br>
 	<div class="container">
 	<form role="form">
+
+	<div class="col-sm-4">
+	</div>
+
+	<div class="form-group" class="col-sm-4 control-label">
+		<div class="radio">
+      	<label><input type="radio" name="optradio">Failure Entry</label>
+		<label><input type="radio" name="optradio">Replacement Entry</label>
+    </div>
+	</div>
+
+	<div class="col-sm-4">
+	</div>
+
+</br>
 
 	
 
@@ -32,7 +47,7 @@
 	</div>
 
 	<div class="form-group" class="col-sm-4 control-label">
-		<label for="ExternalProg">External Program Number:</label>
+		<label for="ExternalProg">Failed Name:</label>
 		
 		<input type = "text" id = "ExternalProg" name = "ExternalProg">
 		
@@ -46,7 +61,7 @@
 	<div class="col-sm-4">
 	</div>
 	<div class="form-group" class="col-sm-4 control-label">
-		<label for="OpenFailure">Open Failure Date:</label>
+		<label for="OpenFailure">Failed Part Number:</label>
 		
 		<input type = "text" id = "OpenFailure" name = "OpenFailure">
 		
@@ -56,70 +71,53 @@
 	</div>
 
 	</br>
-
 	<div class="col-sm-4">
 	</div>
 	<div class="form-group" class="col-sm-4 control-label">
-		<label for="CloseDate">Close Date:</label>
+		<label for="CloseDate">Failed Serial Number:</label>
 		 <input type = "text" id = "CloseDate" name = "CloseDate">
 	</div>
 
 	<div class="col-sm-4">
 	</div>
+
 	</br>
 
 	<div class="col-sm-4">
 	</div>
 
-	<div class="form-group" class="col-sm-4 control-label">
-      <label for="Received">Received By:</label>
-      <select id = "Received" name = "Received">
-        <option>Bob Decina</option>
-        <option>John Smith</option>
-        <option>JaneDoe</option>
-      </select>
- 	</div>
-
- 	<div class="col-sm-4">
-	</div>
-
- 	<br>
-
- 	<div class="col-sm-4">
-	</div>
-
-	<div class="form-group" class="col-sm-4 control-label">
-      <label for="Request">Request Source:</label>
-      <select id = "Request" name = "Request">
-        <option>Lockheed Martin</option>
-        <option>Customer</option>
-        <option>Vendor</option>
-      </select>
-     </div>
-
-     <div class="col-sm-4">
-	</div>
-
-     </br>
-
-    <div class="col-sm-4">
-	</div>
-
+	</br>
 	<div class="col-sm-4">
-    <div class="form-group" class="col-sm-4 control-label">
-  		<label for="comment">Comment:</label>
-  		<textarea class="form-control" rows="5" id="comment"></textarea>
 	</div>
+
+	<div class="form-group" class="col-sm-4 control-label">
+		<label for="CloseDate">Failed Reference Designator:</label>
+		 <input type = "text" id = "CloseDate" name = "CloseDate">
 	</div>
 
 	<div class="col-sm-4">
 	</div>
 
 	</br>
+	<div class="col-sm-4">
+	</div>
+	
+	<div class="form-group" class="col-sm-4 control-label">
+		<label for="CloseDate">Failed Elapsed Time Meter:</label>
+		 <input type = "text" id = "elapsed" name = "CloseDate">
+	</div>
+
+	<div class="col-sm-4">
 	</div>
 
 
-     <a href="FailureReplacement.html" class="btn btn-primary" id = "options" role="button">Next</a>
+	
+
+	</br>
+	</div>
+
+
+     <a href="SystemID.html" class="btn btn-primary" id = "options" role="button">Next</a>
      
      </form>
  </div>
