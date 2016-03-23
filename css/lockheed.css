@@ -21,14 +21,15 @@ h1.pagehead{
 	color:white;
 }
 
-input,select{
-	margin-right: 400px;
+input.mobile,select{
+	margin-right: 350px;
 	float:right;
 }
 
 .radio{
 	margin-left: 20px;
 }
+
 
 
 
