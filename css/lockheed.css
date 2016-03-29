@@ -21,6 +21,10 @@ h1.pagehead{
 	color:white;
 }
 
+img {
+	width: 100%;
+	height: auto;
+}
 
 .radio{
 	margin-left: 20px;
