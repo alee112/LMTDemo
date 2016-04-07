@@ -1,0 +1,37 @@
+#center {
+	margin:auto;
+	text-align: center;
+}
+
+#options {
+   display:table;
+   margin: 0 auto;
+   
+}
+
+h1 {
+	color:white;
+	padding-top: 10px;
+	margin-top: 0;
+}
+
+.page-header {
+	background-color: #337ab7;
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+canvas {
+    width: 90%;
+    height: auto;
+}
+
+.img-responsive {
+	margin: 0 auto;
+}
+
+.radio{
+	margin-left: 20px;
+}
+
+
