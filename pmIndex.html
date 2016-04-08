@@ -15,7 +15,7 @@
 <body>
 	<div class="top-bar">
 		<div class="page-header">
-		  <h1 class="text-center">Program Manager</h1>
+		  <h1 class="text-center">Dashboard</h1>
 		</div>		
 	</div>
 
@@ -38,27 +38,47 @@
 			    	var data = [
 					    {
 					        value: 50,
-					        color:"#F7464A",
-					        highlight: "#FF5A5E",
+					        color:"#808185",
 					        label: "Aircraft"
 					    },
 
 					    {
 					        value: 30,
-					        color: "#46BFBD",
-					        highlight: "#5AD3D1",
+					        color: "#0057B2",
 					        label: "Ships"
 					    },
 
 					    {
 					        value: 15,
-					        color: "#FDB45C",
+					        color: "#283876",
 					        highlight: "#FFC870",
-					        label: "Missle Defense"
+					        label: "Missle Defenses"
 					    }
-					]
+					];
+					var options = {
+				        tooltipEvents: [],
+				        showTooltips: true,
+				        onAnimationComplete: function() {
+				            this.showTooltip(this.segments, true);
+				        },
+				        tooltipTemplate: "<%= label %> - <%= value %>"
+				    };
 
-					var myDoughnutChart = new Chart(ctx).Doughnut(data);
+					var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
+
+
+					$("#products").click( 
+                        function(evt){
+                            var activePoints = myDoughnutChart.getSegmentsAtEvent(evt);
+                            if (activePoints[0].label == "Aircraft") {
+                            	location.href = "aircraft.html";
+                            } else if (activePoints[0].label == "Missle Defenses") {
+                            	location.href = "midef.html";
+                            } else if (activePoints[0].label == "Ships") {
+                            	location.href = "ships.html";
+                            }
+                        }
+                    );
 				}
 			);
 	 	</script>
@@ -69,17 +89,17 @@
 	<br>
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">By Site:</h3>
+			<h3 class="panel-title">By Location:</h3>
 		</div>
 
 		<br>
-		<canvas id="sites" class='img-responsive' height="300"></canvas>
+		<canvas id="location" class='img-responsive' height="300"></canvas>
 	 	<script type="text/javascript">
 	 		$(document).ready(
 				function(){
 					Chart.defaults.global.responsive = true;
 
-					var ctx = document.getElementById("sites").getContext("2d");
+					var ctx = document.getElementById("location").getContext("2d");
 			    	
 					var data = {
 					    labels: ["West", "Northeast", "Southeast", "Midwest", "Europe", "Other"],
@@ -94,7 +114,43 @@
 					    ]
 					};
 
-					var myBarChart = new Chart(ctx).Bar(data);
+					var options = {
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.bars.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y);
+            					});
+            				});
+            			}
+					};
+
+					var myBarChart = new Chart(ctx).Bar(data,options);
+
+					$("#location").click(function(e) {
+					   var activeBars = myBarChart.getBarsAtEvent(e); 
+
+					   if (activeBars[0].label == "West") {
+                        	location.href = "west.html";
+                        } else if (activeBars[0].label == "Northeast") {
+                        	location.href = "ne.html";
+                        } else if (activeBars[0].label == "Southeast") {
+                        	location.href = "se.html";
+                        } else if (activeBars[0].label == "Midwest") {
+                        	location.href = "midwest.html";
+                        } else if (activeBars[0].label == "Europe") {
+                        	location.href = "europe.html";
+                        } else if (activeBars[0].label == "Other") {
+                        	location.href = "other.html";
+                        }
+					});
 				}
 			);
 	 	</script>
@@ -144,8 +200,44 @@
 					    ]
 					};
 
-					var myLineChart = new Chart(ctx).Line(data);
-				}
+					var options = {
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.points.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y-3);
+            					});
+            				});
+            			}
+					};
+
+					var myLineChart = new Chart(ctx).Line(data, options);
+
+					$("#openclose").click(function(e) {
+					   var activePoints = myLineChart.getPointsAtEvent(e);
+
+					   if (activePoints[0].label == "November") {
+                        	location.href = "nov.html";
+                        } else if (activePoints[0].label == "December") {
+                        	location.href = "dec.html";
+                        } else if (activePoints[0].label == "January") {
+                        	location.href = "jan.html";
+                        } else if (activePoints[0].label == "February") {
+                        	location.href = "feb.html";
+                        } else if (activePoints[0].label == "March") {
+                        	location.href = "mar.html";
+                        } else if (activePoints[0].label == "April") {
+                        	location.href = "apr.html";
+                        }
+					});
+            	}
 			);
 	 	</script>
 
@@ -153,71 +245,8 @@
 	</div>
  	<br>
 
- 	<h3>Test</h3>
- 	<br>
-		<canvas id="interactive-bar" class='img-responsive' height="300"></canvas>
-	 	<script type="text/javascript">
-			(function(){
-				var canvas = $id('interactive-bar'),
-					ctx = canvas.getContext('2d'),
-					microBar = new Chart(ctx).Bar({
-						labels: new Array(7),
-						datasets: [{
-							fillColor : "rgba(239,241,245,1)",
-							strokeColor : "rgba(0,0,0,0)",
-							highlightFill: "rgba(230,233,240,1)",
-							data: [random(), random(), random(), random(), random(), random(), random()]
-						}]
-					}, {
-						animation: false,
-						showScale: false,
-						barShowStroke: false,
-						tooltipXPadding: 10,
-						tooltipYPadding: 6,
-						tooltipFontSize: 18,
-						tooltipFontStyle: 'bold',
-						// Boolean - If we want to override with a hard coded scale
-						scaleOverride: true,
-
-						// ** Required if scaleOverride is true **
-						// Number - The number of steps in a hard coded scale
-						scaleSteps: 2,
-						// Number - The value jump in the hard coded scale
-						scaleStepWidth: 50,
-						// Number - The scale starting value
-						scaleStartValue: 0,
-					});
-
-				helpers.addEvent(canvas, 'mousemove', function(evt){
-					var bars =microBar.getBarsAtEvent(evt);
-					if (bars.length > 0){
-						canvas.style.cursor = "pointer";
-					}
-					else {
-						canvas.style.cursor = "default";
-					}
-				});
-
-				helpers.addEvent(canvas, 'dblclick', function(evt){
-					microBar.options.animation = true;
-					microBar.options.onAnimationComplete = function(){
-						this.showTooltip(this.activeElements, true);
-					};
-					var bars = microBar.getBarsAtEvent(evt);
-					helpers.each(bars, function(bar){
-						bar.value = Math.max(random(), 5);
-					});
-					if (bars.length > 0){
-						microBar.update();
-					}
-				});
-
-			});
-	 	</script>
-
-	 	<br>
-	</div>
- 	<br>
+ 	<a href="all.html" class="btn btn-primary" id = "options" role="button">All Records</a>
+	<br>
      
 </body>
 </html>
