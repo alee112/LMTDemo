@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/jquery-1.12.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/Chart.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/pm.css">
+	
+</head>
+<body>
+	<div class="top-bar">
+		<div class="page-header">
+		  <h1 class="text-center">SEWIP</h1>
+		</div>		
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Records:</h3>
+		</div>
+
+		<br>
+		<canvas id="status" class='img-responsive' height="300"></canvas>
+	 	<script type="text/javascript">
+	 		$(document).ready(
+				function(){
+					Chart.defaults.global.responsive = true;
+
+					var ctx = document.getElementById("status").getContext("2d");
+			    	
+			    	var data = [
+					    {
+					        value: 16,
+					        color:"#808185",
+					        label: "Open"
+					    },
+
+					    {
+					        value: 13,
+					        color: "#0057B2",
+					        label: "Closed"
+					    },
+
+					    {
+					        value: 30,
+					        color: "#283876",
+					        highlight: "#FFC870",
+					        label: "Archived"
+					    }
+					];
+					var options = {
+				        tooltipEvents: [],
+				        showTooltips: true,
+				        onAnimationComplete: function() {
+				            this.showTooltip(this.segments, true);
+				        },
+				        tooltipTemplate: "<%= label %> - <%= value %>"
+				    };
+
+					var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
+
+
+					$("#status").click( 
+                        function(evt){
+                            var activePoints = myDoughnutChart.getSegmentsAtEvent(evt);
+                            if (activePoints[0].label == "Open") {
+                            	location.href = "open.html";
+                            } else if (activePoints[0].label == "Closed") {
+                            	location.href = "closed.html";
+                            } else if (activePoints[0].label == "Archived") {
+                            	location.href = "archived.html";
+                            }
+                        }
+                    );
+				}
+			);
+	 	</script>
+
+	 	<br>
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Open/Close over 6 Months:</h3>
+		</div>
+
+		<br>
+		<canvas id="openclose" class='img-responsive' height="300"></canvas>
+	 	<script type="text/javascript">
+	 		$(document).ready(
+				function(){
+					Chart.defaults.global.responsive = true;
+
+					var ctx = document.getElementById("openclose").getContext("2d");
+
+					var data = {
+					    labels: ["November", "December", "January", "February", "March", "April"],
+					    datasets: [
+					        {
+					        	label: "Open",
+					            fillColor: "rgba(220,220,220,0.2)",
+					            strokeColor: "rgba(220,220,220,1)",
+					            pointColor: "rgba(220,220,220,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(220,220,220,1)",
+					            data: [4, 5, 8, 5, 4, 3]
+					        },
+					        {
+					            label: "Close",
+					            fillColor: "rgba(151,187,205,0.2)",
+					            strokeColor: "rgba(151,187,205,1)",
+					            pointColor: "rgba(151,187,205,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(151,187,205,1)",
+					            data: [7, 3, 4, 3, 2, 5]
+					        }
+					    ]
+					};
+
+					var options = {
+						scaleBeginAtZero: true,
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.points.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y-3);
+            					});
+            				});
+            			}
+					};
+
+					var myLineChart = new Chart(ctx).Line(data, options);
+
+					$("#openclose").click(function(e) {
+					   var activePoints = myLineChart.getPointsAtEvent(e);
+
+					   if (activePoints[0].label == "November") {
+                        	location.href = "nov.html";
+                        } else if (activePoints[0].label == "December") {
+                        	location.href = "dec.html";
+                        } else if (activePoints[0].label == "January") {
+                        	location.href = "jan.html";
+                        } else if (activePoints[0].label == "February") {
+                        	location.href = "feb.html";
+                        } else if (activePoints[0].label == "March") {
+                        	location.href = "mar.html";
+                        } else if (activePoints[0].label == "April") {
+                        	location.href = "apr.html";
+                        }
+					});
+            	}
+			);
+	 	</script>
+	</div>
+ 	<br>
+
+ 	<a href="pmindex.html" class="btn btn-primary" id = "options" role="button">Dashboard</a>
+	<br>
+     
+</body>
+</html>

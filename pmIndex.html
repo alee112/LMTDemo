@@ -23,36 +23,36 @@
 
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3 class="panel-title">By Products:</h3>
+			<h3 class="panel-title">Non-Archived Records:</h3>
 		</div>
 
 		<br>
-		<canvas id="products" class='img-responsive' height="300"></canvas>
+		<canvas id="program" class='img-responsive' height="300"></canvas>
 	 	<script type="text/javascript">
 	 		$(document).ready(
 				function(){
 					Chart.defaults.global.responsive = true;
 
-					var ctx = document.getElementById("products").getContext("2d");
+					var ctx = document.getElementById("program").getContext("2d");
 			    	
 			    	var data = [
 					    {
 					        value: 50,
 					        color:"#808185",
-					        label: "Aircraft"
+					        label: "SQQ89"
 					    },
 
 					    {
 					        value: 30,
 					        color: "#0057B2",
-					        label: "Ships"
+					        label: "CORES"
 					    },
 
 					    {
 					        value: 15,
 					        color: "#283876",
 					        highlight: "#FFC870",
-					        label: "Missle Defenses"
+					        label: "SEWIP"
 					    }
 					];
 					var options = {
@@ -67,90 +67,18 @@
 					var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
 
 
-					$("#products").click( 
+					$("#program").click( 
                         function(evt){
                             var activePoints = myDoughnutChart.getSegmentsAtEvent(evt);
-                            if (activePoints[0].label == "Aircraft") {
-                            	location.href = "aircraft.html";
-                            } else if (activePoints[0].label == "Missle Defenses") {
-                            	location.href = "midef.html";
-                            } else if (activePoints[0].label == "Ships") {
-                            	location.href = "ships.html";
+                            if (activePoints[0].label == "SQQ89") {
+                            	location.href = "sqq89.html";
+                            } else if (activePoints[0].label == "CORES") {
+                            	location.href = "cores.html";
+                            } else if (activePoints[0].label == "SEWIP") {
+                            	location.href = "sewip.html";
                             }
                         }
                     );
-				}
-			);
-	 	</script>
-
-	 	<br>
-	</div>
-
-	<br>
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3 class="panel-title">By Location:</h3>
-		</div>
-
-		<br>
-		<canvas id="location" class='img-responsive' height="300"></canvas>
-	 	<script type="text/javascript">
-	 		$(document).ready(
-				function(){
-					Chart.defaults.global.responsive = true;
-
-					var ctx = document.getElementById("location").getContext("2d");
-			    	
-					var data = {
-					    labels: ["West", "Northeast", "Southeast", "Midwest", "Europe", "Other"],
-					    datasets: [
-					        {
-					            fillColor: "rgba(220,220,220,0.5)",
-					            strokeColor: "rgba(220,220,220,0.8)",
-					            highlightFill: "rgba(220,220,220,0.75)",
-					            highlightStroke: "rgba(220,220,220,1)",
-					            data: [10, 20, 12, 15, 18, 16]
-					        },
-					    ]
-					};
-
-					var options = {
-						showTooltips: false,
-					    onAnimationComplete: function () {
-
-					        var ctx = this.chart.ctx;
-					        ctx.font = this.scale.font;
-					        ctx.fillStyle = this.scale.textColor
-					        ctx.textAlign = "center";
-					        ctx.textBaseline = "bottom";
-
-					        this.datasets.forEach(function (dataset) {
-					            dataset.bars.forEach(function (points) {
-					                ctx.fillText(points.value, points.x, points.y);
-            					});
-            				});
-            			}
-					};
-
-					var myBarChart = new Chart(ctx).Bar(data,options);
-
-					$("#location").click(function(e) {
-					   var activeBars = myBarChart.getBarsAtEvent(e); 
-
-					   if (activeBars[0].label == "West") {
-                        	location.href = "west.html";
-                        } else if (activeBars[0].label == "Northeast") {
-                        	location.href = "ne.html";
-                        } else if (activeBars[0].label == "Southeast") {
-                        	location.href = "se.html";
-                        } else if (activeBars[0].label == "Midwest") {
-                        	location.href = "midwest.html";
-                        } else if (activeBars[0].label == "Europe") {
-                        	location.href = "europe.html";
-                        } else if (activeBars[0].label == "Other") {
-                        	location.href = "other.html";
-                        }
-					});
 				}
 			);
 	 	</script>
@@ -175,7 +103,7 @@
 					var ctx = document.getElementById("openclose").getContext("2d");
 
 					var data = {
-					    labels: ["November", "December", "January", "February", "March", "April"],
+					    labels: ["SAS", "IWSS", "USS", "NV"],
 					    datasets: [
 					        {
 					            label: "Open",
@@ -185,7 +113,7 @@
 					            pointStrokeColor: "#fff",
 					            pointHighlightFill: "#fff",
 					            pointHighlightStroke: "rgba(220,220,220,1)",
-					            data: [10, 12, 11, 13, 10, 5]
+					            data: [10, 12, 9, 13]
 					        },
 					        {
 					            label: "Close",
@@ -195,7 +123,76 @@
 					            pointStrokeColor: "#fff",
 					            pointHighlightFill: "#fff",
 					            pointHighlightStroke: "rgba(151,187,205,1)",
-					            data: [15, 10, 9, 10, 12, 6]
+					            data: [15, 10, 11, 10]
+					        }
+					    ]
+					};
+
+					var options = {
+						scaleBeginAtZero: true,
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.points.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y-3);
+            					});
+            				});
+            			}
+					};
+
+					var myLineChart = new Chart(ctx).Line(data, options);
+
+					$("#openclose").click(function(e) {
+					   var activePoints = myLineChart.getPointsAtEvent(e);
+
+					   if (activePoints[0].label == "SAS") {
+                        	location.href = "sas.html";
+                        } else if (activePoints[0].label == "IWSS") {
+                        	location.href = "iwss.html";
+                        } else if (activePoints[0].label == "USS") {
+                        	location.href = "uss.html";
+                        } else if (activePoints[0].label == "NV") {
+                        	location.href = "nv.html";
+                        } 
+					});
+            	}
+			);
+	 	</script>
+
+	 	<br>
+
+	 	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Percent Change in Time at Vendor:</h3>
+		</div>
+
+		<br>
+		<canvas id="chgvendor" class='img-responsive' height="300"></canvas>
+	 	<script type="text/javascript">
+	 		$(document).ready(
+				function(){
+					Chart.defaults.global.responsive = true;
+
+					var ctx = document.getElementById("chgvendor").getContext("2d");
+
+					var data = {
+					    labels: ["November", "December", "January", "February", "March", "April"],
+					    datasets: [
+					        {
+					            fillColor: "rgba(220,220,220,0.2)",
+					            strokeColor: "rgba(220,220,220,1)",
+					            pointColor: "rgba(220,220,220,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(220,220,220,1)",
+					            data: [2, -1, -2, 1, 1.5, .5]
 					        }
 					    ]
 					};
@@ -220,7 +217,7 @@
 
 					var myLineChart = new Chart(ctx).Line(data, options);
 
-					$("#openclose").click(function(e) {
+					$("#chgvendor").click(function(e) {
 					   var activePoints = myLineChart.getPointsAtEvent(e);
 
 					   if (activePoints[0].label == "November") {
@@ -240,10 +237,84 @@
             	}
 			);
 	 	</script>
-
-	 	<br>
 	</div>
  	<br>
+
+
+ 	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Most Failed Part Number:</h3>
+		</div>
+			<table class="table">
+				<tbody>
+					<tr>
+						<td onclick="location.href='100020.html'">&nbsp;&nbsp;&nbsp;&nbsp;100020</td>
+					</tr>
+					<tr>
+						<td onclick="location.href='112030.html'">&nbsp;&nbsp;&nbsp;&nbsp;112030</td>
+					</tr>
+					<tr>
+						<td onclick="location.href='506070.html'">&nbsp;&nbsp;&nbsp;&nbsp;506070</td>
+					</tr>
+					<tr>
+						<td onclick="location.href='385876.html'">&nbsp;&nbsp;&nbsp;&nbsp;385876</td>
+					</tr>
+					<tr>
+						<td onclick="location.href='238468.html'">&nbsp;&nbsp;&nbsp;&nbsp;238468</td>
+					</tr>
+				</tbody>
+			</table>
+	</div>
+ 	<br>
+
+ 	<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+			      Summary Table</a>
+			      </h4>
+			    </div>
+			    <div id="collapse0" class="panel-collapse collapse">
+			      <div class="panel-body">
+			      	<table class="table">
+			      		<thead>
+			      			<td style="border: solid #dddddd;  border-right-width: 1px; border-top-width:0px; border-left-width:0px; border-bottom-width:1px;"> </td>
+			      			<td onclick="location.href='sas.html'">SAS</td>
+			      			<td onclick="location.href='iwss.html'">IWSS</td>
+			      			<td onclick="location.href='uss.html'">USS</td>
+			      			<td onclick="location.href='nv.html'">NV</td>
+			      		</thead>
+						<tbody>
+							<tr>
+								<td style="border: 1px solid #dddddd; border-top-width:0px; border-left-width:0px; border-bottom-width:1px;">Total Failures Past 12 Months</td>
+								<td onclick="location.href='sas.html'">30</td>
+								<td onclick="location.href='iwss.html'">50</td>
+								<td onclick="location.href='uss.html'">20</td>
+								<td onclick="location.href='nv.html'">70</td>
+							</tr>
+
+							<tr>
+								<td style="border: 1px solid #dddddd; border-top-width:0px;border-left-width:0px; border-bottom-width:1px;">% Change in Time at Vendor</td>
+								<td onclick="location.href='sas.html'">1</td>
+								<td onclick="location.href='iwss.html'">2</td>
+								<td onclick="location.href='uss.html'">-.5</td>
+								<td onclick="location.href='nv.html'">.25</td>
+							</tr>
+							
+							<tr>
+								<td style="border: 1px solid #dddddd; border-top-width:0px;border-left-width:0px; border-bottom-width:0px;">Average Open/Close Days</td>
+								<td onclick="location.href='sas.html'">30</td>
+								<td onclick="location.href='iwss.html'">45</td>
+								<td onclick="location.href='uss.html'">50</td>
+								<td onclick="location.href='nv.html'">38</td>
+							</tr>
+						</tbody>
+					</table>
+			      </div>
+			    </div>
+		  </div>
+		</div> 
 
  	<a href="all.html" class="btn btn-primary" id = "options" role="button">All Records</a>
 	<br>
