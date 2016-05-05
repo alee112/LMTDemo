@@ -133,7 +133,6 @@
 
 					var myBarChart = new Chart(ctx).Bar(data, options);
 
-
 					$("#openclose").click(function(e) {
 					   var activePoints = myBarChart.getBarsAtEvent(e);
 
@@ -149,9 +148,8 @@
                         	location.href = "mar.html";
                         } else if (activePoints[0].label == "April") {
                         	location.href = "apr.html";
-                        
+                        } 
 					});
-
 					document.getElementById('legend').innerHTML = myBarChart.generateLegend();
             	}
 			);
