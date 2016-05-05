@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+	<script src="js/jquery-1.12.1.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/Chart.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/pm.css">
+	
+</head>
+<body>
+	<div class="top-bar">
+		<div class="page-header">
+		  <h1 class="text-center">Testing PHP Connection</h1>
+		</div>		
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Non-Archived Records:</h3>
+		</div>
+
+		<br>
+		<canvas id="program" class='img-responsive' height="300"></canvas>
+	 	<script type="text/javascript">
+	 		$(document).ready(
+				function(){
+					Chart.defaults.global.responsive = true;
+
+					var ctx = document.getElementById("program").getContext("2d");
+			    	
+			    	var data = [
+					    {
+					        value: 50,
+					        color:"#808185",
+					        label: "SQQ89"
+					    },
+
+					    {
+					        value: 30,
+					        color: "#0057B2",
+					        label: "CORES"
+					    },
+
+					    {
+					        value: 15,
+					        color: "#283876",
+					        highlight: "#FFC870",
+					        label: "SEWIP"
+					    }
+					];
+					var options = {
+				        tooltipEvents: [],
+				        showTooltips: true,
+				        onAnimationComplete: function() {
+				            this.showTooltip(this.segments, true);
+				        },
+				        tooltipTemplate: "<%= label %> - <%= value %>"
+				    };
+
+					var myDoughnutChart = new Chart(ctx).Doughnut(data,options);
+
+
+					$("#program").click( 
+                        function(evt){
+                            var activePoints = myDoughnutChart.getSegmentsAtEvent(evt);
+                            if (activePoints[0].label == "SQQ89") {
+                            	location.href = "sqq89.html";
+                            } else if (activePoints[0].label == "CORES") {
+                            	location.href = "cores.html";
+                            } else if (activePoints[0].label == "SEWIP") {
+                            	location.href = "sewip.html";
+                            }
+                        }
+                    );
+				}
+			);
+	 	</script>
+
+	 	<br>
+	</div>
+
+	<br>
+
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Open/Close:</h3>
+		</div>
+
+		<br>
+		<canvas id="openclose" class='img-responsive' height="300"></canvas>
+	 	<script type="text/javascript">
+	 		$(document).ready(
+				function(){
+					Chart.defaults.global.responsive = true;
+
+					var ctx = document.getElementById("openclose").getContext("2d");
+
+					var data = {
+					    labels: ["SAS", "IWSS", "USS", "NV"],
+					    datasets: [
+					        {
+					            label: "Open",
+					            fillColor: "rgba(220,220,220,0.2)",
+					            strokeColor: "rgba(220,220,220,1)",
+					            pointColor: "rgba(220,220,220,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(220,220,220,1)",
+					            data: [10, 12, 9, 13]
+					        },
+					        {
+					            label: "Close",
+					            fillColor: "rgba(151,187,205,0.2)",
+					            strokeColor: "rgba(151,187,205,1)",
+					            pointColor: "rgba(151,187,205,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(151,187,205,1)",
+					            data: [15, 10, 11, 10]
+					        }
+					    ]
+					};
+
+					var options = {
+						scaleBeginAtZero: true,
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.points.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y-3);
+            					});
+            				});
+            			}
+					};
+
+					var myLineChart = new Chart(ctx).Line(data, options);
+
+					$("#openclose").click(function(e) {
+					   var activePoints = myLineChart.getPointsAtEvent(e);
+
+					   if (activePoints[0].label == "SAS") {
+                        	location.href = "sas.html";
+                        } else if (activePoints[0].label == "IWSS") {
+                        	location.href = "iwss.html";
+                        } else if (activePoints[0].label == "USS") {
+                        	location.href = "uss.html";
+                        } else if (activePoints[0].label == "NV") {
+                        	location.href = "nv.html";
+                        } 
+					});
+            	}
+			);
+	 	</script>
+
+	 	<br>
+
+	 	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Percent Change in Time at Vendor:</h3>
+		</div>
+
+		<br>
+		<canvas id="chgvendor" class='img-responsive' height="300"></canvas>
+	 	<script type="text/javascript">
+	 		$(document).ready(
+				function(){
+					Chart.defaults.global.responsive = true;
+
+					var ctx = document.getElementById("chgvendor").getContext("2d");
+
+					var data = {
+					    labels: ["November", "December", "January", "February", "March", "April"],
+					    datasets: [
+					        {
+					            fillColor: "rgba(220,220,220,0.2)",
+					            strokeColor: "rgba(220,220,220,1)",
+					            pointColor: "rgba(220,220,220,1)",
+					            pointStrokeColor: "#fff",
+					            pointHighlightFill: "#fff",
+					            pointHighlightStroke: "rgba(220,220,220,1)",
+					            data: [2, -1, -2, 1, 1.5, .5]
+					        }
+					    ]
+					};
+
+					var options = {
+						showTooltips: false,
+					    onAnimationComplete: function () {
+
+					        var ctx = this.chart.ctx;
+					        ctx.font = this.scale.font;
+					        ctx.fillStyle = this.scale.textColor
+					        ctx.textAlign = "center";
+					        ctx.textBaseline = "bottom";
+
+					        this.datasets.forEach(function (dataset) {
+					            dataset.points.forEach(function (points) {
+					                ctx.fillText(points.value, points.x, points.y-3);
+            					});
+            				});
+            			}
+					};
+
+					var myLineChart = new Chart(ctx).Line(data, options);
+
+					$("#chgvendor").click(function(e) {
+					   var activePoints = myLineChart.getPointsAtEvent(e);
+
+					   if (activePoints[0].label == "November") {
+                        	location.href = "nov.html";
+                        } else if (activePoints[0].label == "December") {
+                        	location.href = "dec.html";
+                        } else if (activePoints[0].label == "January") {
+                        	location.href = "jan.html";
+                        } else if (activePoints[0].label == "February") {
+                        	location.href = "feb.html";
+                        } else if (activePoints[0].label == "March") {
+                        	location.href = "mar.html";
+                        } else if (activePoints[0].label == "April") {
+                        	location.href = "apr.html";
+                        }
+					});
+            	}
+			);
+	 	</script>
+	</div>
+ 	<br>
+
+
+ 	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Deficiency Type:</h3>
+		</div>
+			<table class="table">
+				<tbody>
+					<?php 
+						$servername = "localhost";
+						$username = "root";
+						$password = "admin";
+						$dbname = "fields";
+
+						// Create connection
+						$conn = new mysqli($servername, $username, $password, $dbname);
+						// Check connection
+						if ($conn->connect_error) {
+						    die("Connection failed: " . $conn->connect_error);
+						}
+
+						$sql = "SELECT name FROM deficiencytype";
+						$result = $conn->query($sql);
+
+						if ($result->num_rows > 0) {
+						    // output data of each row
+						    while($row = $result->fetch_assoc()) {
+						        echo "<tr><td>" . $row["name"] . "</td></tr>";
+						    }
+						} else {
+						    echo "0 results";
+						}
+						$conn->close();
+					 ?>
+				</tbody>
+			</table>
+	</div>
+ 	<br>
+
+ 	<div class="panel-group" id="accordion">
+			<div class="panel panel-default">
+			    <div class="panel-heading">
+			      <h4 class="panel-title">
+			        <a data-toggle="collapse" data-parent="#accordion" href="#collapse0">
+			      Summary Table</a>
+			      </h4>
+			    </div>
+			    <div id="collapse0" class="panel-collapse collapse">
+			      <div class="panel-body">
+			      	<table class="table">
+			      		<thead>
+			      			<td style="border: solid #dddddd;  border-right-width: 1px; border-top-width:0px; border-left-width:0px; border-bottom-width:1px;"> </td>
+			      			<td onclick="location.href='sas.html'">SAS</td>
+			      			<td onclick="location.href='iwss.html'">IWSS</td>
+			      			<td onclick="location.href='uss.html'">USS</td>
+			      			<td onclick="location.href='nv.html'">NV</td>
+			      		</thead>
+						<tbody>
+							<tr>
+								<td style="border: 1px solid #dddddd; border-top-width:0px; border-left-width:0px; border-bottom-width:1px;">Total Failures Past 12 Months</td>
+								<td onclick="location.href='sas.html'">30</td>
+								<td onclick="location.href='iwss.html'">50</td>
+								<td onclick="location.href='uss.html'">20</td>
+								<td onclick="location.href='nv.html'">70</td>
+							</tr>
+
+							<tr>
+								<td style="border: 1px solid #dddddd; border-top-width:0px;border-left-width:0px; border-bottom-width:1px;">% Change in Time at Vendor</td>
+								<td onclick="location.href='sas.html'">1</td>
+								<td onclick="location.href='iwss.html'">2</td>
+								<td onclick="location.href='uss.html'">-.5</td>
+								<td onclick="location.href='nv.html'">.25</td>
+							</tr>
+							
+							<tr>
+								<td style="border: 1px solid #dddddd; border-top-width:0px;border-left-width:0px; border-bottom-width:0px;">Average Open/Close Days</td>
+								<td onclick="location.href='sas.html'">30</td>
+								<td onclick="location.href='iwss.html'">45</td>
+								<td onclick="location.href='uss.html'">50</td>
+								<td onclick="location.href='nv.html'">38</td>
+							</tr>
+						</tbody>
+					</table>
+			      </div>
+			    </div>
+		  </div>
+		</div> 
+
+ 	<a href="all.html" class="btn btn-primary" id = "options" role="button">All Records</a>
+	<br>
+     
+</body>
+</html>

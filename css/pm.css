@@ -34,4 +34,39 @@ canvas {
 	margin-left: 20px;
 }
 
+.panel-heading a:after {
+    font-family:'Glyphicons Halflings';
+    float: right;
+    color: grey;
+    content:"\e114";
+}
+.panel-heading a.collapsed:after {
+	font-family:'Glyphicons Halflings';
+	float: right;
+    content:"\e080";
+}
+
+.chart-legend li span{
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 5px;
+}
+
+li
+{
+    display: inline;
+    list-style-type: none;
+    padding-right: 30px;
+}
+
+ul
+{
+    list-style-type: none;
+    padding-left: 100px;
+}
+
+h1 {
+	display:;
+}
 

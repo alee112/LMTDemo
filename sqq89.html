@@ -95,6 +95,9 @@
 
 		<br>
 		<canvas id="openclose" class='img-responsive' height="300"></canvas>
+		<br>
+		<div id = "legend" class = "chart-legend"></div>
+
 	 	<script type="text/javascript">
 	 		$(document).ready(
 				function(){
@@ -106,14 +109,14 @@
 					    labels: ["November", "December", "January", "February", "March", "April"],
 					    datasets: [
 					        {
-					        	label: "Open",
+					            label: "Open",
 					            fillColor: "rgba(220,220,220,0.2)",
 					            strokeColor: "rgba(220,220,220,1)",
 					            pointColor: "rgba(220,220,220,1)",
 					            pointStrokeColor: "#fff",
 					            pointHighlightFill: "#fff",
 					            pointHighlightStroke: "rgba(220,220,220,1)",
-					            data: [4, 5, 8, 5, 4, 3]
+					            data: [10, 12, 9, 13, 5, 7]
 					        },
 					        {
 					            label: "Close",
@@ -123,36 +126,17 @@
 					            pointStrokeColor: "#fff",
 					            pointHighlightFill: "#fff",
 					            pointHighlightStroke: "rgba(151,187,205,1)",
-					            data: [7, 3, 4, 3, 2, 5]
+					            data: [15, 10, 11, 10, 6, 8]
 					        }
 					    ]
 					};
 
-					var options = {
-						scaleBeginAtZero: true,
-						showTooltips: false,
-					    onAnimationComplete: function () {
-
-					        var ctx = this.chart.ctx;
-					        ctx.font = this.scale.font;
-					        ctx.fillStyle = this.scale.textColor
-					        ctx.textAlign = "center";
-					        ctx.textBaseline = "bottom";
-
-					        this.datasets.forEach(function (dataset) {
-					            dataset.points.forEach(function (points) {
-					                ctx.fillText(points.value, points.x, points.y-3);
-            					});
-            				});
-            			}
-					};
-
-					var myLineChart = new Chart(ctx).Line(data, options);
+					var myBarChart = new Chart(ctx).Bar(data, options);
 
 					$("#openclose").click(function(e) {
-					   var activePoints = myLineChart.getPointsAtEvent(e);
+					   var activePoints = myBarChart.getBarsAtEvent(e);
 
-					   if (activePoints[0].label == "November") {
+					   	if (activePoints[0].label == "November") {
                         	location.href = "nov.html";
                         } else if (activePoints[0].label == "December") {
                         	location.href = "dec.html";
@@ -164,15 +148,16 @@
                         	location.href = "mar.html";
                         } else if (activePoints[0].label == "April") {
                         	location.href = "apr.html";
-                        }
+                        } 
 					});
+					document.getElementById('legend').innerHTML = myBarChart.generateLegend();
             	}
 			);
 	 	</script>
 	</div>
  	<br>
 
- 	<a href="pmIndex.html" class="btn btn-primary" id = "options" role="button">Dashboard</a>
+ 	<a href="pmindex.html" class="btn btn-primary" id = "options" role="button">Dashboard</a>
 	<br>
      
 </body>
